@@ -1,5 +1,9 @@
 type Query {
-  feed: [Link!]!
+  feed(filter: String, skip: Int, orderBy: LinkOrderByInput, take: Int): Feed!
+}
+type Feed {
+  links: [Link!]!
+  count: Int!
 }
 
 type Subscription {
@@ -34,4 +38,15 @@ type User {
   name: String!
   email: String!
   links: [Link!]!
+}
+
+input LinkOrderByInput {
+  description: Sort
+  url: Sort
+  createdAt: Sort
+}
+
+enum Sort {
+  asc
+  desc
 }
